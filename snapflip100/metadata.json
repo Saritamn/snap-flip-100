@@ -1,0 +1,8 @@
+{
+  "name": "Snap Flip Inventory AI",
+  "description": "AI-powered inventory management for resellers. Capture photos, analyze items, and calculate profits automatically.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ]
+}

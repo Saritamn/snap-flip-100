@@ -1,0 +1,75 @@
+{
+  "entities": {
+    "Profile": {
+      "title": "User Profile",
+      "description": "User account information and subscription status",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "photo": { "type": "string" },
+        "subscriptionTier": { "type": "string", "enum": ["Free", "Pro", "Unlimited"] },
+        "lookupCount": { "type": "integer" },
+        "maxLookups": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "subscriptionTier"]
+    },
+    "Item": {
+      "title": "Inventory Item",
+      "description": "An item in the user's inventory",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "brand": { "type": "string" },
+        "type": { "type": "string" },
+        "condition": { "type": "string" },
+        "purchasePrice": { "type": "number" },
+        "averageResalePrice": { "type": "number" },
+        "estimatedProfit": { "type": "number" },
+        "sellThroughRate": { "type": "string" },
+        "marketplace": { "type": "string" },
+        "photo": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["Draft", "Posted", "Sold"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "soldPrice": { "type": "number" },
+        "shippingCost": { "type": "number" },
+        "marketplaceFee": { "type": "number" },
+        "marketplaceSoldOn": { "type": "string" },
+        "actualProfit": { "type": "number" }
+      },
+      "required": ["userId", "name", "status"]
+    },
+    "Trip": {
+      "title": "Mileage Trip",
+      "description": "A recorded mileage trip for tax purposes",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "startLocation": { "type": "string" },
+        "endLocation": { "type": "string" },
+        "miles": { "type": "number" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "date", "miles"]
+    }
+  },
+  "firestore": {
+    "/profiles/{userId}": {
+      "schema": "Profile",
+      "description": "User profiles indexed by their Auth UID"
+    },
+    "/items/{itemId}": {
+      "schema": "Item",
+      "description": "Inventory items"
+    },
+    "/trips/{tripId}": {
+      "schema": "Trip",
+      "description": "Mileage tracking records"
+    }
+  }
+}
